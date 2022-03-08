@@ -1,6 +1,10 @@
 # vrc-dbone-to-pbone-converter
-Convert Dynamicbone to Physicalbone(VRC SDK) 
+Convert Dynamicbone to Physicsbones(VRC SDK) 
 
+## Project requirements
+- Project version Unity 2019.4.31f1
+- Imported Dynamicbone
+- Imported VRC SDK (beta version, included PhysicsBone dll) 
 
 ## Quickstart
 

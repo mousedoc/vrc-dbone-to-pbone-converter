@@ -80,3 +80,10 @@ Assets/Plugins/Editor/JetBrains*
 # Ignore all local history of files
 .history
 .ionide
+
+
+### Ignore VRChat SDK
+Assets/VRCSDK/*
+
+### Ignore Dynamicbone asset
+Assets/DynamicBone/*

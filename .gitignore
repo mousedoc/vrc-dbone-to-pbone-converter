@@ -84,6 +84,9 @@ Assets/Plugins/Editor/JetBrains*
 
 ### Ignore VRChat SDK
 Assets/VRCSDK/*
+Assets/VRCSDK.meta
+
 
 ### Ignore Dynamicbone asset
 Assets/DynamicBone/*
+Assets/DynamicBone.meta

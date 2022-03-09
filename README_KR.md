@@ -21,7 +21,10 @@ SpringOffset, PullOffset 등의 조정할 수 있는 기능이 있지만 포괄�
 1. Convert 버튼 클릭
 ![cap01](ReadmeAssets/00.png)
 
+## 기여
+컨트리뷰션은 언제나 환영입니다.
+자유롭게 [Issue](https://github.com/mousedoc/vrc-dbone-to-pbone-converter/issues) 등록 or [Pull Request](https://github.com/mousedoc/vrc-dbone-to-pbone-converter/pulls) 생성 부탁드립니다.
 
-## 참
+## 참고
 Customized this [Bone Converter Dtp Converter](https://ranchino.booth.pm/items/3701802)
 > Thanx for [JWS7634](https://github.com/JWS7634) & [Ranchino-git](https://github.com/Ranchino-git)

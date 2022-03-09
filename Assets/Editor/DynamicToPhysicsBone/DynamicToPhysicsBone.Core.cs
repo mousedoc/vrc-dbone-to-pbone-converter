@@ -14,9 +14,9 @@ namespace DynamicToPhysicsBone
         public float GrabMovement = 0.5f;
 
         // Offset
-        public float PullOffset = 0.2f;
-
-        public float SpringOffset = 0.2f;
+        public float PullOffset = 0f;
+        public float SpringOffset = 0f;
+        public float ImmobileOffset = 0.25f;
     }
 
     public class Core
@@ -106,19 +106,19 @@ namespace DynamicToPhysicsBone
                 // RadiusCurve
                 pBone.radiusCurve = dBone.m_RadiusDistrib;
 
-                // DBone.stiffness ---> PBone.pull
+                //DBone.damping ---> PBone.pull
                 //pBone.pull = dBone.m_Elasticity * 0.8f + 0.2f;
-                pBone.pull = Mathf.Clamp(dBone.m_Elasticity + option.PullOffset, 0f, 1f);
-                pBone.pullCurve = dBone.m_ElasticityDistrib;
+                pBone.pull = Mathf.Clamp(dBone.m_Damping + option.PullOffset, 0f, 1f);
+                pBone.pullCurve = dBone.m_DampingDistrib;
 
-                // DBone.damping ---> PBone.spring
+                // DBone.elasticity ---> PBone.spring
                 //pBone.spring = dBone.m_Damping * 0.7f + 0.3f;
-                pBone.spring = Mathf.Clamp(dBone.m_Damping + option.SpringOffset, 0f, 1f);
-                pBone.springCurve = dBone.m_DampingDistrib;
+                pBone.spring = Mathf.Clamp(dBone.m_Elasticity + option.SpringOffset, 0f, 1f);
+                pBone.springCurve = dBone.m_ElasticityDistrib;
 
                 // DBone.inert ---> PBone.immobile
                 //pBone.immobile = dBone.m_Inert + dBone.m_Stiffness;
-                pBone.immobile = Mathf.Clamp(1f - dBone.m_Inert, 0f, 1f);
+                pBone.immobile = Mathf.Clamp(1f - dBone.m_Inert + option.ImmobileOffset, 0f, 1f);
                 pBone.immobileCurve = dBone.m_InertDistrib;
 
                 foreach (var dBonesCollider in dBone.m_Colliders)

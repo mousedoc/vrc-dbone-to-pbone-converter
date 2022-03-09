@@ -14,9 +14,12 @@ namespace DynamicToPhysicsBone
         public float GrabMovement = 0.5f;
 
         // Offset
-        public float PullOffset = 0f;
+        public float PullOffset = 20f;
         public float SpringOffset = 0f;
         public float ImmobileOffset = 0.25f;
+
+        // Clamp
+        public float MaxAngle = 30f;
     }
 
     public class Core
@@ -120,6 +123,9 @@ namespace DynamicToPhysicsBone
                 //pBone.immobile = dBone.m_Inert + dBone.m_Stiffness;
                 pBone.immobile = Mathf.Clamp(1f - dBone.m_Inert + option.ImmobileOffset, 0f, 1f);
                 pBone.immobileCurve = dBone.m_InertDistrib;
+
+                // Max Angle
+                pBone.maxAngle = Mathf.Clamp(option.MaxAngle, 0f, 180f);
 
                 foreach (var dBonesCollider in dBone.m_Colliders)
                 {

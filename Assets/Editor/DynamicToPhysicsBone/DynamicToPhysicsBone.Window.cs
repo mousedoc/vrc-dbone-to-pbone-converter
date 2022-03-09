@@ -16,7 +16,7 @@ namespace DynamicToPhysicsBone
             DrawOptions();
 
             ChangeBackgroundColor(Color.green);
-            if (GUILayout.Button("Convert"))
+            if (GUILayout.Button("Convert", GUILayout.Height(50)))
             {
                 var core = new Core();
                 core.Convert(targetObject, option);
@@ -26,13 +26,21 @@ namespace DynamicToPhysicsBone
 
         private void DrawOptions()
         {
+            EditorGUILayout.LabelField("Options", EditorStyles.boldLabel);
+
+            // Grab & Pose
             option.AllowGrab = EditorGUILayout.Toggle(nameof(option.AllowGrab), option.AllowGrab);
             option.AllowPose = EditorGUILayout.Toggle(nameof(option.AllowPose), option.AllowPose);
             option.MaxStretch = EditorGUILayout.FloatField(nameof(option.MaxStretch), option.MaxStretch);
             option.GrabMovement = EditorGUILayout.FloatField(nameof(option.GrabMovement), option.GrabMovement);
+
+            // Offset
             option.PullOffset = EditorGUILayout.FloatField(nameof(option.PullOffset), option.PullOffset);
             option.SpringOffset = EditorGUILayout.FloatField(nameof(option.SpringOffset), option.SpringOffset);
             option.ImmobileOffset = EditorGUILayout.FloatField(nameof(option.ImmobileOffset), option.ImmobileOffset);
+
+            // Clamp
+            option.MaxAngle = EditorGUILayout.FloatField(nameof(option.MaxAngle), option.MaxAngle);
         }
 
         private void ChangeBackgroundColor(Color color) => GUI.backgroundColor = color;

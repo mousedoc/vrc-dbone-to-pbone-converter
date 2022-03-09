@@ -32,6 +32,7 @@ namespace DynamicToPhysicsBone
             option.GrabMovement = EditorGUILayout.FloatField(nameof(option.GrabMovement), option.GrabMovement);
             option.PullOffset = EditorGUILayout.FloatField(nameof(option.PullOffset), option.PullOffset);
             option.SpringOffset = EditorGUILayout.FloatField(nameof(option.SpringOffset), option.SpringOffset);
+            option.ImmobileOffset = EditorGUILayout.FloatField(nameof(option.ImmobileOffset), option.ImmobileOffset);
         }
 
         private void ChangeBackgroundColor(Color color) => GUI.backgroundColor = color;

@@ -22,6 +22,11 @@ In order to finally get the desired result, it is recommended to adjust the Phys
 ![cap01](ReadmeAssets/00.png)
 
 
+## Contribution
+Contributions are always welcome.
+Create [Issue](https://github.com/mousedoc/vrc-dbone-to-pbone-converter/issues) or [Pull Request](https://github.com/mousedoc/vrc-dbone-to-pbone-converter/pulls).
+
+
 ## References
 Customized this [Bone Converter Dtp Converter](https://ranchino.booth.pm/items/3701802)
 > Thanx for [JWS7634](https://github.com/JWS7634) & [Ranchino-git](https://github.com/Ranchino-git)

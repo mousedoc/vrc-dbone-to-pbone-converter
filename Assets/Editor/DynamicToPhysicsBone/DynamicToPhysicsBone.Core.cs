@@ -1,30 +1,41 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using VRC.SDK3.Dynamics.PhysBone.Components;
 
 namespace DynamicToPhysicsBone
 {
-
     public class ConvertOption
     {
+        // Grab & Pose
+        public bool AllowGrab = true;
+        public bool AllowPose = true;
+        public float MaxStretch = 0f;
+        public float GrabMovement = 0.5f;
+
+        // Offset
+        public float PullOffset = 0.2f;
+
+        public float SpringOffset = 0.2f;
     }
 
-    public class Core 
+    public class Core
     {
+        private GameObject targetObject;
+        private ConvertOption option;
 
-        private GameObject targetObject; 
-
-        public void Convert(GameObject targetObject)
+        public void Convert(GameObject targetObject, ConvertOption option)
         {
-            if(targetObject == null)
+            if (targetObject == null)
             {
                 Debug.LogError("Target object is empty");
                 return;
             }
 
             this.targetObject = targetObject;
+            this.option = option;
 
+            ProcessConvert();
         }
 
         private void ProcessConvert()
@@ -32,23 +43,105 @@ namespace DynamicToPhysicsBone
             var dBones = targetObject.GetComponentsInChildren<DynamicBone>(true);
             var dBoneColliders = targetObject.GetComponentsInChildren<DynamicBoneCollider>(true);
 
-            RemoveDynamicBone();
-            RemoveDynamicBoneCollider();
+            AddPhysicsBoneCollider(dBoneColliders);
+            AddPhysicsBone(dBones);
+
+            RemoveDynamicBone(dBones);
+            RemoveDynamicBoneCollider(dBoneColliders);
 
             EditorUtility.SetDirty(targetObject);
         }
 
-        private void RemoveDynamicBone()
+        private void AddPhysicsBoneCollider(IEnumerable<DynamicBoneCollider> dBoneColliders)
         {
-            
+            foreach (var dBoneCollider in dBoneColliders)
+            {
+                if (dBoneCollider.m_Bound == DynamicBoneColliderBase.Bound.Outside)
+                {
+                    var dBoneColliderObj = dBoneCollider.gameObject;
+                    var pBone = dBoneColliderObj.AddComponent<VRCPhysBoneCollider>();
+
+                    // shapeType
+                    pBone.shapeType = VRC.Dynamics.VRCPhysBoneColliderBase.ShapeType.Capsule;
+                    // RootTransform
+                    pBone.rootTransform = dBoneCollider.gameObject.transform;
+                    // Radius
+                    pBone.radius = dBoneCollider.m_Radius;
+                    // Height
+                    pBone.height = dBoneCollider.m_Height;
+                    // Center
+                    pBone.position = dBoneCollider.m_Center;
+                }
+                /// Ignore insdie collider
+                //else if (dBoneCollider.m_Bound == DynamicBoneCollider.Bound.Inside || !IsInBoundColilderRemove)
+                //{
+                //    GameObject SelectedObject = dBoneCollider.gameObject;
+                //    VRC.SDK3.Dynamics.PhysBone.Components.VRCPhysBoneCollider pBone;
+
+                //    pBone = SelectedObject.AddComponent<VRC.SDK3.Dynamics.PhysBone.Components.VRCPhysBoneCollider>();
+                //    //shapeType
+                //    pBone.shapeType = VRC.Dynamics.VRCPhysBoneColliderBase.ShapeType.Plane;
+                //    //RootTransform
+                //    pBone.rootTransform = dBoneCollider.gameObject.transform;
+                //    //Position & Rotation
+                //    pBone.position = dBoneCollider.m_Center + new Vector3(0, 0, -dBoneCollider.m_Radius);
+                //    pBone.rotation = Quaternion.Euler(90f, 0f, 0f);
+                //}
+            }
         }
 
-        private void RemoveDynamicBoneCollider()
+        private void AddPhysicsBone(IEnumerable<DynamicBone> dBones)
         {
+            foreach (var dBone in dBones)
+            {
+                var dBoneObject = dBone.gameObject;
+                var pBone = dBoneObject.AddComponent<VRCPhysBone>();
 
-            var boneCollider = targetObject
+                // RootBone
+                pBone.rootTransform = dBone.m_Root;
+                // Ignore Transform
+                pBone.ignoreTransforms = dBone.m_Exclusions;
+                // Radius
+                pBone.radius = dBone.m_Radius;
+                // RadiusCurve
+                pBone.radiusCurve = dBone.m_RadiusDistrib;
+
+                // DBone.stiffness ---> PBone.pull
+                //pBone.pull = dBone.m_Elasticity * 0.8f + 0.2f;
+                pBone.pull = Mathf.Clamp(dBone.m_Elasticity + option.PullOffset, 0f, 1f);
+                pBone.pullCurve = dBone.m_ElasticityDistrib;
+
+                // DBone.damping ---> PBone.spring
+                //pBone.spring = dBone.m_Damping * 0.7f + 0.3f;
+                pBone.spring = Mathf.Clamp(dBone.m_Damping + option.SpringOffset, 0f, 1f);
+                pBone.springCurve = dBone.m_DampingDistrib;
+
+                // DBone.inert ---> PBone.immobile
+                //pBone.immobile = dBone.m_Inert + dBone.m_Stiffness;
+                pBone.immobile = Mathf.Clamp(1f - dBone.m_Inert, 0f, 1f);
+                pBone.immobileCurve = dBone.m_InertDistrib;
+
+                foreach (var dBonesCollider in dBone.m_Colliders)
+                {
+                    if (dBonesCollider == null)
+                        continue;
+
+                    var pBoneCollider = dBonesCollider.GetComponents<VRCPhysBoneCollider>();
+                    pBone.colliders.AddRange(pBoneCollider);
+                }
+            }
         }
 
+        private void RemoveDynamicBone(IEnumerable<DynamicBone> dBones)
+        {
+            foreach (var dBone in dBones)
+                Object.DestroyImmediate(dBone);
+        }
+
+        private void RemoveDynamicBoneCollider(IEnumerable<DynamicBoneCollider> dBoneColliders)
+        {
+            foreach (var dBoneCollider in dBoneColliders)
+                Object.DestroyImmediate(dBoneCollider);
+        }
     }
-
 }

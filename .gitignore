@@ -90,3 +90,18 @@ Assets/VRCSDK.meta
 ### Ignore Dynamicbone asset
 Assets/DynamicBone/*
 Assets/DynamicBone.meta
+
+## Ignore Booth Avatar assets
+Assets/Karin/*
+Assets/Karin.meta
+Assets/lilToon/*
+Assets/lilToon.meta
+Assets/Sunao Shader/*
+Assets/Sunao Shader.meta
+csc.rsp
+csc.rsp.meta
+Assets/lilToonSetting.meta
+Assets/lilToonSetting/lil_setting.hlsl
+Assets/lilToonSetting/lil_setting.hlsl.meta
+Assets/lilToonSetting/ShaderSetting.asset
+Assets/lilToonSetting/ShaderSetting.asset.meta

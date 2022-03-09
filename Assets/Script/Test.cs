@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class Test : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public float speed = 3f;
+    public float distance = 1f;
+
+    private Vector3 startPos;
+
+    private void Awake()
     {
-        
+        startPos = transform.position;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        var offset = new Vector3(Mathf.Sin(Time.time * speed) * distance, 0f, 0f);
+        transform.position = startPos + offset;
     }
 }

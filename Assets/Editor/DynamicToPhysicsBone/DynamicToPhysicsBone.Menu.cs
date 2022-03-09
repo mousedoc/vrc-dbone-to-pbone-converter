@@ -1,20 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
-using UnityEngine;
-using DynamicToPhysicsBone.Window;
+﻿using UnityEditor;
 
 namespace DynamicToPhysicsBone
 {
-
     public class Menu
     {
         [MenuItem("Tools/DynamicToPhysicsBone/Open", priority = 15)]
         public static void ShowWindow()
         {
-            var window = EditorWindow.GetWindow<DynamicToPhysicsBone.Window>();
+            var window = EditorWindow.GetWindow<Window>();
             window.Show();
         }
-
     }
 }

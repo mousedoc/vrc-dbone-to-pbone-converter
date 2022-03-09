@@ -1,5 +1,6 @@
 # vrc-dbone-to-pbone-converter
-Convert Dynamicbone to Physicsbones(VRC SDK) 
+[![Korean](https://img.shields.io/badge/Language-Korean-blue.svg)](README_KR.md)  
+Convert Dynamicbone to Physicsbones(VRC SDK)   
 
 ## Project requirements
 - Project version Unity 2019.4.31f1

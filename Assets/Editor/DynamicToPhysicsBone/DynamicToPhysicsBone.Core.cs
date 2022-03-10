@@ -62,18 +62,18 @@ namespace DynamicToPhysicsBone
                 if (dBoneCollider.m_Bound == DynamicBoneColliderBase.Bound.Outside)
                 {
                     var dBoneColliderObj = dBoneCollider.gameObject;
-                    var pBone = dBoneColliderObj.AddComponent<VRCPhysBoneCollider>();
+                    var pBoneCollider = dBoneColliderObj.AddComponent<VRCPhysBoneCollider>();
 
                     // shapeType
-                    pBone.shapeType = VRC.Dynamics.VRCPhysBoneColliderBase.ShapeType.Capsule;
+                    pBoneCollider.shapeType = VRC.Dynamics.VRCPhysBoneColliderBase.ShapeType.Capsule;
                     // RootTransform
-                    pBone.rootTransform = dBoneCollider.gameObject.transform;
+                    pBoneCollider.rootTransform = dBoneCollider.gameObject.transform;
                     // Radius
-                    pBone.radius = dBoneCollider.m_Radius;
+                    pBoneCollider.radius = dBoneCollider.m_Radius;
                     // Height
-                    pBone.height = dBoneCollider.m_Height;
+                    pBoneCollider.height = dBoneCollider.m_Height;
                     // Center
-                    pBone.position = dBoneCollider.m_Center;
+                    pBoneCollider.position = dBoneCollider.m_Center;
                 }
                 /// Ignore insdie collider
                 //else if (dBoneCollider.m_Bound == DynamicBoneCollider.Bound.Inside || !IsInBoundColilderRemove)
@@ -124,8 +124,12 @@ namespace DynamicToPhysicsBone
                 pBone.immobile = Mathf.Clamp(1f - dBone.m_Inert + option.ImmobileOffset, 0f, 1f);
                 pBone.immobileCurve = dBone.m_InertDistrib;
 
-                // Max Angle
+                // Options
+                pBone.allowGrabbing = option.AllowGrab;
+                pBone.allowPosing = option.AllowPose;
                 pBone.maxAngle = Mathf.Clamp(option.MaxAngle, 0f, 180f);
+                pBone.maxStretch = Mathf.Clamp(option.MaxStretch, 0, 5f);
+                pBone.grabMovement = Mathf.Clamp(option.GrabMovement, 0, 1f);
 
                 foreach (var dBonesCollider in dBone.m_Colliders)
                 {

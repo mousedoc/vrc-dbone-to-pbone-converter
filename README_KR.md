@@ -14,7 +14,7 @@ SpringOffset, PullOffset 등의 조정할 수 있는 기능이 있지만 포괄�
 원하는 결과를 얻기 위해, 변환 후 VRCPhsycBone에 대한 새부적인 조정이 필요합니다.
 
 ## 빠른 시작
-1. [DynamicToPhysicsBone.unitypackage](https://github.com/mousedoc/vrc-dbone-to-pbone-converter/releases/tag/1.0.0) 를 연다
+1. [DynamicToPhysicsBone.unitypackage](https://github.com/mousedoc/vrc-dbone-to-pbone-converter/releases) 를 연다
 1. Tools/DynamicToPhysicBone/Open 메뉴 클릭
 1. 자신의 복사된 아바타를 'Target Avatar'에 추가  
 1. SpringOffset, PullOffset 등의 옵션 조정

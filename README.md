@@ -14,7 +14,7 @@ It provides SpringOffset, PullOffset, etc., but it is a comprehensive option.
 In order to finally get the desired result, it is recommended to adjust the PhysicsBone directly after conversion.  
 
 ## Quickstart
-1. Open [DynamicToPhysicsBone.unitypackage](https://github.com/mousedoc/vrc-dbone-to-pbone-converter/releases/tag/1.0.0)
+1. Open [DynamicToPhysicsBone.unitypackage](https://github.com/mousedoc/vrc-dbone-to-pbone-converter/releases)
 1. Click menu in Tools/DynamicToPhysicBone/Open
 1. Insert your avatars's copy in Target Avatar  
 1. Adjust some options  

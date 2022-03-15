@@ -9,9 +9,9 @@ Dynamicbone 아바타를 Physicsbones 아바타로 변경
 
 ## 결과
 ![cap01](ReadmeAssets/01.png)  
-이 컨버팅 툴은 수치를 완벽하게 옮겨주지 않습니다.
-SpringOffset, PullOffset 등의 조정할 수 있는 기능이 있지만 포괄적인 옵션입니다.
-원하는 결과를 얻기 위해, 변환 후 VRCPhsycBone에 대한 새부적인 조정이 필요합니다.
+이 컨버팅 툴은 수치를 완벽하게 옮겨주지 않습니다.  
+SpringOffset, PullOffset 등의 조정할 수 있는 기능이 있지만 포괄적인 옵션입니다.  
+원하는 결과를 얻기 위해, 변환 후 VRCPhsycBone에 대한 새부적인 조정이 필요합니다.  
 
 ## 빠른 시작
 1. [DynamicToPhysicsBone.unitypackage](https://github.com/mousedoc/vrc-dbone-to-pbone-converter/releases) 를 연다

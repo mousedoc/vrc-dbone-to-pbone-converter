@@ -2,6 +2,10 @@
 [![Korean](https://img.shields.io/badge/Language-Korean-blue.svg)](README_KR.md)  
 Convert Dynamicbone to Physicsbones(VRC SDK)   
 
+## Before use
+- Now, VRC SDK supports Dbone to Pbnoe Ccoverter
+- It would be better to use the SDK's converter.
+
 ## Project requirements
 - Project version Unity 2019.4.31f1
 - Imported Dynamicbone
